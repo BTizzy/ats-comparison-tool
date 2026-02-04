@@ -3,258 +3,804 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Greenhouse Platform Defense - ATS Strategic Analysis</title>
+    <title>Enterprise ATS Strategic Analysis | Greenhouse Implementation Roadmap</title>
     <style>
-        :root {
-            --color-bg-base: #0f172a;
-            --color-bg-elevated: #1e293b;
-            --color-bg-surface: #334155;
-            --color-text-primary: #f1f5f9;
-            --color-text-secondary: #cbd5e1;
-            --color-text-muted: #94a3b8;
-            --color-accent: #38bdf8;
-            --color-success: #22c55e;
-            --color-warning: #fbbf24;
-            --color-danger: #ef4444;
-            --color-border: rgba(148, 163, 184, 0.2);
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
         }
-        * { margin: 0; padding: 0; box-sizing: border-box; }
+
         body {
             font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
-            background: var(--color-bg-base);
-            color: var(--color-text-primary);
+            background: linear-gradient(135deg, #0a0e27 0%, #1a1f3a 100%);
+            color: #e4e6eb;
             line-height: 1.6;
-            padding: 0;
+            padding: 20px;
         }
-        .header {
-            background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%);
-            padding: 3rem 2rem;
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            background: rgba(20, 25, 45, 0.95);
+            border-radius: 16px;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
+            overflow: hidden;
+        }
+
+        header {
+            background: linear-gradient(135deg, #1e3a8a 0%, #3b82f6 100%);
+            padding: 40px;
             text-align: center;
-            border-bottom: 3px solid var(--color-accent);
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
+            border-bottom: 3px solid #60a5fa;
         }
-        .header h1 { font-size: 2.5rem; margin-bottom: 0.5rem; color: var(--color-accent); font-weight: 700; }
-        .header p { font-size: 1.2rem; color: var(--color-text-secondary); }
-        .container { max-width: 1600px; margin: 0 auto; padding: 2rem; }
-        .section {
-            background: var(--color-bg-elevated);
+
+        header h1 {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+            color: #ffffff;
+            font-weight: 700;
+        }
+
+        header p {
+            font-size: 1.1em;
+            color: #dbeafe;
+            font-weight: 300;
+        }
+
+        .executive-summary {
+            background: linear-gradient(135deg, #1e293b 0%, #334155 100%);
+            padding: 40px;
+            margin: 30px;
             border-radius: 12px;
-            padding: 2.5rem;
-            margin-bottom: 2rem;
-            border: 1px solid var(--color-border);
-            box-shadow: 0 2px 12px rgba(0, 0, 0, 0.3);
+            border-left: 5px solid #10b981;
         }
-        .section h2 {
-            color: var(--color-accent);
-            margin-bottom: 1.5rem;
-            font-size: 1.9rem;
-            border-bottom: 2px solid var(--color-accent);
-            padding-bottom: 0.5rem;
+
+        .executive-summary h2 {
+            color: #6ee7b7;
+            margin-bottom: 20px;
+            font-size: 1.8em;
         }
-        .section h3 { color: var(--color-success); margin: 2rem 0 1rem 0; font-size: 1.5rem; }
-        .section h4 { color: var(--color-text-primary); margin: 1.5rem 0 0.75rem 0; font-size: 1.2rem; }
-        .exec-summary {
-            background: linear-gradient(135deg, rgba(56, 189, 248, 0.15), rgba(34, 197, 94, 0.15));
-            border: 2px solid var(--color-success);
-            border-radius: 12px;
-            padding: 2rem;
-            margin-bottom: 2rem;
-        }
-        .recommendation {
-            font-size: 1.3rem;
-            font-weight: 600;
-            color: var(--color-success);
-            margin: 1.5rem 0;
-            padding: 1.5rem;
-            background: rgba(34, 197, 94, 0.1);
-            border-left: 4px solid var(--color-success);
+
+        .recommendation-box {
+            background: rgba(16, 185, 129, 0.1);
+            border: 2px solid #10b981;
             border-radius: 8px;
+            padding: 25px;
+            margin-top: 20px;
         }
-        .context-grid {
+
+        .recommendation-box h3 {
+            color: #6ee7b7;
+            margin-bottom: 15px;
+            font-size: 1.3em;
+        }
+
+        .content {
+            padding: 40px;
+        }
+
+        h2 {
+            color: #60a5fa;
+            margin: 40px 0 20px 0;
+            font-size: 1.8em;
+            border-bottom: 2px solid #3b82f6;
+            padding-bottom: 10px;
+        }
+
+        h3 {
+            color: #93c5fd;
+            margin: 30px 0 15px 0;
+            font-size: 1.4em;
+        }
+
+        h4 {
+            color: #bfdbfe;
+            margin: 20px 0 10px 0;
+            font-size: 1.1em;
+        }
+
+        .comparison-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 25px 0;
+            background: rgba(30, 41, 59, 0.6);
+            border-radius: 8px;
+            overflow: hidden;
+        }
+
+        .comparison-table thead {
+            background: linear-gradient(135deg, #1e40af 0%, #3b82f6 100%);
+        }
+
+        .comparison-table th {
+            padding: 18px;
+            text-align: left;
+            font-weight: 600;
+            color: #ffffff;
+            font-size: 1.05em;
+        }
+
+        .comparison-table td {
+            padding: 16px 18px;
+            border-bottom: 1px solid rgba(59, 130, 246, 0.2);
+        }
+
+        .comparison-table tbody tr:hover {
+            background: rgba(59, 130, 246, 0.1);
+        }
+
+        .feature-category {
+            font-weight: 600;
+            color: #93c5fd;
+            background: rgba(59, 130, 246, 0.15);
+        }
+
+        .status-excellent {
+            color: #4ade80;
+            font-weight: 600;
+        }
+
+        .status-good {
+            color: #60a5fa;
+            font-weight: 600;
+        }
+
+        .status-fair {
+            color: #fbbf24;
+            font-weight: 600;
+        }
+
+        .status-poor {
+            color: #f87171;
+            font-weight: 600;
+        }
+
+        .metric-card {
+            background: rgba(30, 41, 59, 0.6);
+            border-radius: 8px;
+            padding: 20px;
+            margin: 15px 0;
+            border-left: 4px solid #3b82f6;
+        }
+
+        .metric-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 1rem;
-            margin: 1.5rem 0;
+            gap: 20px;
+            margin: 25px 0;
         }
-        .context-item { background: var(--color-bg-surface); padding: 1.25rem; border-radius: 8px; border: 1px solid var(--color-border); }
-        .context-item strong { color: var(--color-accent); display: block; margin-bottom: 0.5rem; }
-        table { width: 100%; border-collapse: collapse; background: var(--color-bg-surface); border-radius: 8px; overflow: hidden; }
-        th { background: var(--color-accent); color: var(--color-bg-base); padding: 1.25rem; text-align: left; font-weight: 600; }
-        td { padding: 1.25rem; border-bottom: 1px solid var(--color-border); vertical-align: top; }
-        tr:hover { background: rgba(56, 189, 248, 0.05); }
-        .status-excellent { color: var(--color-success); font-weight: 600; }
-        .status-good { color: #10b981; }
-        .status-fair { color: var(--color-warning); }
-        .status-poor { color: var(--color-danger); }
-        .bullet-list { list-style: none; padding-left: 0; }
-        .bullet-list li { padding: 0.75rem 0; padding-left: 2rem; position: relative; line-height: 1.6; }
-        .bullet-list li:before { content: "▸"; color: var(--color-accent); position: absolute; left: 0.5rem; font-weight: bold; }
+
+        .metric-box {
+            background: linear-gradient(135deg, #1e293b 0%, #334155 100%);
+            padding: 25px;
+            border-radius: 8px;
+            border: 1px solid rgba(59, 130, 246, 0.3);
+        }
+
+        .metric-box h4 {
+            color: #93c5fd;
+            margin-bottom: 15px;
+        }
+
+        .metric-value {
+            font-size: 2em;
+            font-weight: 700;
+            color: #60a5fa;
+            margin: 10px 0;
+        }
+
+        .risk-level-critical {
+            color: #ef4444;
+            font-weight: 700;
+        }
+
+        .risk-level-high {
+            color: #f59e0b;
+            font-weight: 700;
+        }
+
+        .risk-level-medium {
+            color: #fbbf24;
+            font-weight: 700;
+        }
+
+        .risk-level-low {
+            color: #4ade80;
+            font-weight: 700;
+        }
+
+        ul, ol {
+            margin: 15px 0 15px 30px;
+        }
+
+        li {
+            margin: 8px 0;
+            line-height: 1.7;
+        }
+
+        .timeline {
+            background: rgba(30, 41, 59, 0.6);
+            padding: 25px;
+            border-radius: 8px;
+            margin: 20px 0;
+        }
+
+        .timeline-item {
+            display: flex;
+            margin: 15px 0;
+            padding: 15px;
+            background: rgba(59, 130, 246, 0.05);
+            border-radius: 6px;
+            border-left: 3px solid #3b82f6;
+        }
+
+        .timeline-phase {
+            font-weight: 600;
+            color: #60a5fa;
+            min-width: 180px;
+        }
+
+        .compliance-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+            margin: 25px 0;
+        }
+
+        .compliance-card {
+            background: rgba(30, 41, 59, 0.6);
+            padding: 20px;
+            border-radius: 8px;
+            border: 1px solid rgba(59, 130, 246, 0.3);
+        }
+
+        .compliance-card h4 {
+            color: #93c5fd;
+            margin-bottom: 12px;
+        }
+
+        .trillium-value {
+            background: linear-gradient(135deg, #065f46 0%, #059669 100%);
+            border: 2px solid #10b981;
+            padding: 25px;
+            border-radius: 8px;
+            margin: 25px 0;
+        }
+
+        .trillium-value h3 {
+            color: #6ee7b7;
+        }
+
+        strong {
+            color: #93c5fd;
+        }
+
         .highlight-box {
-            background: rgba(56, 189, 248, 0.1);
-            border-left: 4px solid var(--color-accent);
-            padding: 1.5rem;
-            margin: 1.5rem 0;
-            border-radius: 8px;
+            background: rgba(16, 185, 129, 0.1);
+            border-left: 4px solid #10b981;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 4px;
         }
-        .danger-box {
-            background: rgba(239, 68, 68, 0.1);
-            border-left: 4px solid var(--color-danger);
-            padding: 1.5rem;
-            margin: 1.5rem 0;
+
+        .alternative-section {
+            background: rgba(251, 191, 36, 0.05);
+            border: 1px solid rgba(251, 191, 36, 0.3);
+            padding: 25px;
             border-radius: 8px;
+            margin: 25px 0;
         }
+
+        .alternative-section h3 {
+            color: #fbbf24;
+        }
+
         @media (max-width: 768px) {
-            .header h1 { font-size: 1.8rem; }
-            .container { padding: 1rem; }
-            .section { padding: 1.5rem; }
-            table { font-size: 0.9rem; }
-            th, td { padding: 0.75rem; }
+            header h1 {
+                font-size: 1.8em;
+            }
+
+            .metric-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .timeline-item {
+                flex-direction: column;
+            }
+
+            .timeline-phase {
+                min-width: auto;
+                margin-bottom: 10px;
+            }
         }
     </style>
 </head>
 <body>
-    <div class="header">
-        <h1>Greenhouse Platform Defense</h1>
-        <p>Strategic Analysis: Why Greenhouse Remains The Superior ATS Choice | February 2026</p>
-    </div>
-
     <div class="container">
-        <div class="exec-summary">
-            <h2>✓ Executive Recommendation</h2>
-            <div class="recommendation">
-                MAINTAIN GREENHOUSE: Industry-Leading Compliance, Proven Integration Ecosystem, Zero Migration Risk
+        <header>
+            <h1>Enterprise ATS Strategic Analysis</h1>
+            <p>Greenhouse Implementation Roadmap | Automotive Manufacturing | 6,800 Employees</p>
+        </header>
+        
+        <div class="executive-summary">
+            <h2>Executive Summary</h2>
+            <p>This analysis provides a strategic roadmap for completing the Greenhouse ATS implementation for a 6,800-employee automotive manufacturing organization. After 6 months of implementation work, the platform requires focused remediation to operationalize SAP SuccessFactors integration and federal contractor compliance capabilities.</p>
+
+            <div class="recommendation-box">
+                <h3>Strategic Recommendation: Complete Greenhouse Implementation</h3>
+                <p><strong>Decision: Fix-in-Place with Trillium-Led 8-10 Week Remediation</strong></p>
+                <p><strong>Core Rationale:</strong></p>
+                <ul>
+                    <li><strong>Industry-Leading Platform:</strong> Greenhouse is the gold standard for structured hiring with proven 31-38% bias reduction, 500+ integration marketplace, and enterprise-grade compliance capabilities</li>
+                    <li><strong>Investment Protection:</strong> Significant licensing and configuration investment already made; completing implementation delivers immediate ROI vs. migration disruption</li>
+                    <li><strong>Institutional Knowledge:</strong> Trillium embedded team (6 months on-site, 12-month contract) uniquely positioned to remediate with deep understanding of SAP SuccessFactors architecture and recruiting workflows</li>
+                    <li><strong>Proven SAP Integration:</strong> Greenhouse + Workato/BTP middleware is battle-tested architecture used by enterprises with complex HRIS landscapes; SmartRecruiters "native" integration is unproven post-acquisition</li>
+                    <li><strong>Federal Contractor Excellence:</strong> Comprehensive EEOC/OFCCP compliance modules, audit-ready reporting, and proven track record with regulated industries</li>
+                </ul>
+                <p><strong>Acknowledgment:</strong> Incomplete implementation after 6 months reflects execution gaps in integration architecture and project management. Trillium commits to accelerated 8-10 week remediation leveraging institutional knowledge and refined implementation methodology.</p>
             </div>
-            <p><strong>Bottom Line:</strong> Greenhouse delivers superior federal contractor compliance (OFCCP/EEO-1/VETS-4212), battle-tested SAP SuccessFactors integration via BTP, and 500+ integration marketplace. SmartRecruiters presents unproven post-acquisition platform with 6-month migration risk during critical scaling period.</p>
         </div>
 
-        <div class="section">
-            <h2>Organizational Context</h2>
-            <div class="context-grid">
-                <div class="context-item"><strong>Industry:</strong> Electric Vehicle Manufacturing</div>
-                <div class="context-item"><strong>Workforce:</strong> 6,800 employees (2024)</div>
-                <div class="context-item"><strong>HRIS:</strong> SAP SuccessFactors (Employee Central, Compensation, Performance, Learning)</div>
-                <div class="context-item"><strong>Integration Platform:</strong> SAP BTP Integration Suite (recently migrated from CPI Neo)</div>
-                <div class="context-item"><strong>Current ATS:</strong> Greenhouse (operational since 2023)</div>
-                <div class="context-item"><strong>Compliance:</strong> Federal contractor (OFCCP AAP, EEO-1, VETS-4212, CA/AZ requirements)</div>
-            </div>
-        </div>
+        <div class="content">
+            <h2>1. Why Greenhouse is the Clear Winner</h2>
 
-        <div class="section">
-            <h2>Platform Comparison: Greenhouse vs SmartRecruiters</h2>
-            <table>
+            <div class="highlight-box">
+                <h3>Market Position: Industry Gold Standard</h3>
+                <p>Greenhouse pioneered structured hiring methodology and remains the category leader for enterprises prioritizing hiring quality, compliance, and data-driven decision making. Over 7,500 organizations including Cisco, Airbnb, HubSpot, and major automotive manufacturers rely on Greenhouse for mission-critical talent acquisition.</p>
+            </div>
+
+            <h3>Structured Hiring Excellence</h3>
+            <div class="metric-card">
+                <p>Greenhouse's structured hiring framework delivers measurable bias reduction and hiring quality improvements:</p>
+                <ul>
+                    <li><strong>31-38% reduction in unconscious bias:</strong> Standardized interview kits, scorecards, and focus attributes ensure consistent candidate evaluation</li>
+                    <li><strong>Interview Kits:</strong> Pre-built question libraries organized by competency, role, and level; ensures every candidate faces same evaluation criteria</li>
+                    <li><strong>Scorecards with Focus Attributes:</strong> Weighted criteria aligned to role requirements; prevents "gut feel" hiring and enforces data-driven decisions</li>
+                    <li><strong>Standardized Evaluation:</strong> Quantitative scoring (1-4 scale) with qualitative feedback requirements; enables apples-to-apples candidate comparison</li>
+                    <li><strong>Hiring Manager Training Modules:</strong> Built-in training content on structured interviewing, legal compliance, and bias awareness</li>
+                </ul>
+            </div>
+
+            <h3>Integration Ecosystem Dominance</h3>
+            <div class="metric-card">
+                <p><strong>500+ Integrations in Marketplace</strong> - No ATS competitor matches Greenhouse's integration breadth:</p>
+                <ul>
+                    <li><strong>HRIS Systems:</strong> SAP SuccessFactors, Workday, ADP, Paylocity, UKG, BambooHR, Rippling, Gusto - bi-directional sync capabilities</li>
+                    <li><strong>Background Checks:</strong> Checkr, HireRight, Sterling, GoodHire - automated ordering and results integration</li>
+                    <li><strong>Assessments:</strong> Codility, HackerRank, Criteria Corp, PI Behavioral Assessment, Wonderlic - embedded in hiring workflow</li>
+                    <li><strong>Video Interviewing:</strong> Zoom, Microsoft Teams, Google Meet, HireVue - one-click scheduling and recording</li>
+                    <li><strong>Sourcing Tools:</strong> LinkedIn Recruiter, SeekOut, Gem, Beamery - candidate data flows directly into Greenhouse</li>
+                    <li><strong>Job Distribution:</strong> LinkedIn, Indeed, Glassdoor, ZipRecruiter, plus 200+ niche job boards - automated posting and applicant tracking</li>
+                    <li><strong>Compliance Partners:</strong> Affirmity (OFCCP AAP), ADP AIMS (affirmative action), E-Verify providers - audit-ready documentation</li>
+                </ul>
+                <p><strong>Strategic Advantage:</strong> Best-of-breed integration strategy allows organizations to select specialized tools while maintaining single source of truth in Greenhouse.</p>
+            </div>
+
+            <h3>SAP SuccessFactors Integration Architecture</h3>
+            <div class="metric-card">
+                <p>Greenhouse + SAP SuccessFactors integration via Workato or SAP BTP Integration Suite is proven, enterprise-grade architecture:</p>
+                <ul>
+                    <li><strong>Bi-directional Sync:</strong> Position openings from Employee Central → Greenhouse; hired candidates from Greenhouse → Employee Central with full field mapping</li>
+                    <li><strong>Real-time Data Flows:</strong> Organizational hierarchy sync, compensation band validation, offer approval workflows integrated with SF Compensation module</li>
+                    <li><strong>Onboarding Triggers:</strong> Candidate acceptance → automatic Employee Central record creation → Learning module enrollment → Performance review scheduling</li>
+                    <li><strong>Battle-Tested Middleware:</strong> Workato's Greenhouse-SAP SuccessFactors connector used by hundreds of enterprises; pre-built recipes reduce custom development by 60-70%</li>
+                    <li><strong>BTP Integration Suite Compatibility:</strong> Native SAP CPI iFlows leverage recent Neo → Integration Suite migration; unified integration monitoring and error handling</li>
+                </ul>
+                <p><strong>Comparison:</strong> SmartRecruiters' "native" SAP integration is unproven post-acquisition (SAP completed acquisition Nov 2025, only 3 months ago). Integration maturity requires 12-18 months of production validation across diverse SF module configurations.</p>
+            </div>
+
+            <h2>2. Federal Contractor Compliance: Audit-Ready Reporting</h2>
+
+            <h3>Mandatory Compliance Requirements</h3>
+            <div class="compliance-grid">
+                <div class="compliance-card">
+                    <h4>EEO-1 Component 1</h4>
+                    <p><strong>Requirement:</strong> Annual workforce demographics by EEO job category and race/ethnicity</p>
+                    <p><strong>Greenhouse Capability:</strong> Native EEO-1 export with auto-categorization by job family; EEOC-compliant survey templates; separate database storage (firewall from hiring decisions)</p>
+                </div>
+
+                <div class="compliance-card">
+                    <h4>EEO-1 Component 2 (Pay Data)</h4>
+                    <p><strong>Requirement:</strong> Compensation data by demographics (collection suspended 2024 but likely reinstatement)</p>
+                    <p><strong>Greenhouse Capability:</strong> Integration with SAP Compensation module via middleware; W-2 earnings + hours worked data linkage; audit-ready formatting</p>
+                </div>
+
+                <div class="compliance-card">
+                    <h4>OFCCP Affirmative Action Plans</h4>
+                    <p><strong>Requirement:</strong> Written AAPs, applicant flow data, adverse impact analysis, good faith efforts</p>
+                    <p><strong>Greenhouse Capability:</strong> Comprehensive OFCCP compliance module; automated adverse impact calculations (4/5ths rule); internet applicant definition tracking; disposition reason documentation</p>
+                </div>
+
+                <div class="compliance-card">
+                    <h4>VETS-4212 Reporting</h4>
+                    <p><strong>Requirement:</strong> Annual veteran hiring report (Sept 30 deadline)</p>
+                    <p><strong>Greenhouse Capability:</strong> Protected veteran self-ID surveys; automated report export; 5 veteran category tracking; hire vs. applicant metrics by job category</p>
+                </div>
+
+                <div class="compliance-card">
+                    <h4>California Fair Chance Act</h4>
+                    <p><strong>Requirement:</strong> Ban-the-box compliance, delayed background checks</p>
+                    <p><strong>Greenhouse Capability:</strong> Configurable workflows; background check trigger delays until conditional offer; individualized assessment documentation</p>
+                </div>
+
+                <div class="compliance-card">
+                    <h4>Arizona E-Verify/I-9</h4>
+                    <p><strong>Requirement:</strong> E-Verify mandate, I-9 management</p>
+                    <p><strong>Greenhouse Capability:</strong> Marketplace integrations with E-Verify providers (Equifax, LawLogix); I-9 workflow automation; audit trail maintenance</p>
+                </div>
+            </div>
+
+            <h3>Compliance Comparison</h3>
+
+            <table class="comparison-table">
                 <thead>
                     <tr>
-                        <th style="width: 30%;">Capability</th>
-                        <th style="width: 35%;">Greenhouse (Current)</th>
-                        <th style="width: 35%;">SmartRecruiters</th>
+                        <th>Compliance Dimension</th>
+                        <th>Greenhouse (Recommended)</th>
+                        <th>SmartRecruiters (Alternative)</th>
+                        <th>Lever (Historical Context)</th>
                     </tr>
                 </thead>
                 <tbody>
                     <tr>
-                        <td><strong>Market Position & Maturity</strong></td>
-                        <td class="status-excellent">✓✓ PROVEN LEADER<br>
-                        • 7,500+ enterprise customers<br>
-                        • Structured hiring pioneer (2012)<br>
-                        • Proven at scale: Tesla, Airbnb, DoorDash<br>
-                        • 10+ years production stability</td>
-                        <td class="status-fair">⚠ ACQUISITION RISK<br>
-                        • SAP acquisition Nov 2024 (3 months old)<br>
-                        • Integration roadmap unclear<br>
-                        • Post-acquisition customer references: limited<br>
-                        • Strategic direction uncertain</td>
+                        <td class="feature-category">EEO-1 Component 1</td>
+                        <td><span class="status-excellent">Excellent</span><br>Native export, auto-categorization, EEOC survey templates, firewall separation documented</td>
+                        <td><span class="status-good">Good</span><br>Native capabilities, SAP integration for employee data, post-acquisition maturity unclear</td>
+                        <td><span class="status-fair">Fair</span><br>CSV export only, manual Excel manipulation, limited job category mapping</td>
                     </tr>
                     <tr>
-                        <td><strong>Federal Contractor Compliance</strong></td>
-                        <td class="status-excellent">✓✓✓ INDUSTRY GOLD STANDARD<br>
-                        • EEO-1 Component 1 & 2 native reporting<br>
-                        • OFCCP AAP compliance suite (adverse impact, 4/5ths rule)<br>
-                        • VETS-4212 certified workflows<br>
-                        • CA CCPA + AZ state privacy compliance<br>
-                        • 7-year audit trail (OFCCP requirement)<br>
-                        • Bias detection & mitigation tools<br>
-                        • 10+ years federal contractor expertise</td>
-                        <td class="status-good">✓ COMPLIANT<br>
-                        • GDPR, CCPA, EEO, OFCCP basic reporting<br>
-                        • 35 language support<br>
-                        • Audit logging capabilities<br>
-                        ⚠ LIMITATIONS:<br>
-                        • Less specialized federal contractor tools<br>
-                        • Newer to US regulatory depth<br>
-                        • Limited adverse impact automation</td>
+                        <td class="feature-category">EEO-1 Component 2 (Pay Data)</td>
+                        <td><span class="status-excellent">Excellent</span><br>SF Compensation integration via middleware, W-2 + hours worked sync, audit-ready formatting</td>
+                        <td><span class="status-good">Good</span><br>SF Compensation module access, integration maturity unproven (3 months post-acquisition)</td>
+                        <td><span class="status-poor">Poor</span><br>No compensation integration, fully manual process</td>
                     </tr>
                     <tr>
-                        <td><strong>SAP SuccessFactors Integration</strong></td>
-                        <td class="status-excellent">✓✓ BATTLE-TESTED<br>
-                        • Proven BTP Integration Suite (Workato, Boomi, MuleSoft)<br>
-                        • Bi-directional Employee Central sync (production-grade)<br>
-                        • 100+ customer references with SAP SF<br>
-                        • 5+ years production validation<br>
-                        • Documented field mapping & error handling<br>
-                        • 99.9% integration uptime achievable</td>
-                        <td class="status-fair">⚠⚠ UNPROVEN<br>
-                        • SAP "native integration" promised but NO customer refs<br>
-                        • 3-month acquisition = immature roadmap<br>
-                        • Architecture unclear (Cloud Integration? HCI?)<br>
-                        • Risk: SAP may prioritize SF Recruiting over SR<br>
-                        • 12-18 month maturity timeline realistic</td>
+                        <td class="feature-category">OFCCP AAP Compliance</td>
+                        <td><span class="status-excellent">Excellent</span><br>Dedicated OFCCP module, adverse impact automation (4/5ths rule), internet applicant tracking, disposition reasons, good faith documentation</td>
+                        <td><span class="status-good">Good</span><br>AAP reporting capabilities, SAP ecosystem advantage, limited third-party validator reviews post-acquisition</td>
+                        <td><span class="status-fair">Fair</span><br>Basic applicant tracking, manual AAP compilation, no automated adverse impact analysis</td>
                     </tr>
                     <tr>
-                        <td><strong>Integration Ecosystem</strong></td>
-                        <td class="status-excellent">✓✓ 500+ MARKETPLACE<br>
-                        • LinkedIn Recruiter System Connect<br>
-                        • Indeed Apply integration<br>
-                        • Workday, ADP, BambooHR, Paylocity, UKG<br>
-                        • Calendly, DocuSign, HireVue, Codility<br>
-                        • Slack, Teams, Google Workspace</td>
-                        <td class="status-good">✓ 200+ integrations<br>
-                        • Growing marketplace<br>
-                        • SAP ecosystem prioritized<br>
-                        ⚠ Risk: Non-SAP integrations may lag<br>
-                        • Vendor partnership roadmap unclear</td>
+                        <td class="feature-category">VETS-4212 Reporting</td>
+                        <td><span class="status-excellent">Excellent</span><br>Pre-built VETS-4212 template, 5 veteran category tracking, automated DOL export format</td>
+                        <td><span class="status-good">Good</span><br>Veteran tracking, report generation, SAP may enhance in future roadmap</td>
+                        <td><span class="status-fair">Fair</span><br>Veteran status field, fully manual reporting</td>
                     </tr>
                     <tr>
-                        <td><strong>Structured Hiring</strong></td>
-                        <td class="status-excellent">✓✓ PIONEER & LEADER<br>
-                        • Interview kits with focus attributes<br>
-                        • Scorecards with weighted evaluation<br>
-                        • Bias detection & mitigation tools<br>
-                        • 31-38% bias reduction (research-backed)<br>
-                        • Hiring team training & calibration</td>
-                        <td class="status-good">✓ Structured interview support<br>
-                        • Scorecard functionality<br>
-                        ⚠ Less comprehensive bias detection<br>
-                        • Not as deeply embedded in platform</td>
+                        <td class="feature-category">Audit Trail & Retention</td>
+                        <td><span class="status-excellent">Excellent</span><br>Immutable audit logs, 7-year data retention (OFCCP requirement), field-level change history, role-based access logs</td>
+                        <td><span class="status-good">Good</span><br>Audit logging, configurable retention, SAP security framework</td>
+                        <td><span class="status-fair">Fair</span><br>Limited audit logging, default 3-year retention</td>
                     </tr>
                     <tr>
-                        <td><strong>Data Migration Risk</strong></td>
-                        <td class="status-excellent">✓✓ ZERO RISK<br>
-                        • Platform operational & stable<br>
-                        • 3+ years historical data intact<br>
-                        • No workflow disruption<br>
-                        • Continuous optimization ongoing</td>
-                        <td class="status-poor">✗ HIGH RISK<br>
-                        • 6-month full migration timeline<br>
-                        • Candidate/job/pipeline data transfer<br>
-                        • 150+ hiring manager retraining<br>
-                        • Integration rebuilds required<br>
-                        • Q1-Q2 2026 disruption during EV scaling</td>
-                    </tr>
-                    <tr>
-                        <td><strong>Implementation Timeline</strong></td>
-                        <td class="status-excellent">✓ ALREADY OPERATIONAL<br>
-                        • Platform live and stable<br>
-                        • Optimization ongoing</td>
-                        <td class="status-poor">✗ 4-6 MONTH DISRUPTION<br>
-                        • Full implementation: 4-6 months<br>
-                        • Post-launch stabilization: 2-3 months<br>
-                        • Total disruption: 6-9 months</td>
+                        <td class="feature-category">Compliance Partner Ecosystem</td>
+                        <td><span class="status-excellent">Excellent</span><br>Affirmity, ADP AIMS, TalentWise OFCCP integrations; 15+ E-Verify providers; proven compliance workflows</td>
+                        <td><span class="status-fair">Fair</span><br>Limited third-party compliance integrations; SAP ecosystem may expand but currently narrow vs. Greenhouse</td>
+                        <td><span class="status-poor">Poor</span><br>Minimal compliance partner integrations</td>
                     </tr>
                 </tbody>
             </table>
 
-            <div class="highlight-box">
-                <strong>Historical Context - Lever:</strong> Previously used Lever before migrating to Greenhouse in 2023. Lever lacked federal contractor compliance depth (OFCCP AAP automation, EEO-1 Component 2 reporting) and enterprise integration breadth (limited SAP connectors, smaller marketplace). Return to Lever is not strategically viable.
+            <h2>3. Trillium-Led Remediation: 8-10 Week Implementation</h2>
+
+            <div class="trillium-value">
+                <h3>Institutional Knowledge Advantage</h3>
+                <p>Trillium's 6-month embedded engagement provides unique acceleration capabilities vs. external consultants:</p>
+                <ul>
+                    <li><strong>SAP SuccessFactors Architecture Expertise:</strong> Deep familiarity with Employee Central configuration, organizational hierarchy, position management, compensation structures, and learning module workflows</li>
+                    <li><strong>Recruiting Process Understanding:</strong> 6 months observing hiring workflows, pain points, shadow processes, and stakeholder dynamics across departments</li>
+                    <li><strong>Stakeholder Relationships:</strong> Established trust with recruiting leadership, hiring managers, HR operations, IT/HRIS teams - eliminates "who is this consultant?" friction</li>
+                    <li><strong>Previous Implementation Analysis:</strong> Root cause understanding of incomplete implementation challenges; refined approach addresses gaps systematically</li>
+                    <li><strong>12-Month Contract Continuation:</strong> Post-implementation support guaranteed; no handoff risk to internal team or expensive vendor support</li>
+                </ul>
+            </div>
+
+            <h3>Remediation Roadmap</h3>
+
+            <div class="timeline">
+                <h4>Weeks 1-2: Discovery & Architecture Review</h4>
+                <div class="timeline-item">
+                    <div class="timeline-phase">Discovery</div>
+                    <div>
+                        <strong>Activities:</strong> Gap analysis of current implementation state, SAP BTP Integration Suite architecture review, Greenhouse configuration audit, compliance module assessment, stakeholder interviews
+                        <br><strong>Deliverables:</strong> Implementation gap report, integration architecture diagram, compliance readiness scorecard, detailed remediation plan
+                    </div>
+                </div>
+            </div>
+
+            <div class="timeline">
+                <h4>Weeks 3-5: Integration Development</h4>
+                <div class="timeline-item">
+                    <div class="timeline-phase">BTP/Workato Config</div>
+                    <div>
+                        <strong>Activities:</strong> CPI iFlow development or Workato recipe configuration for bi-directional sync, Employee Central position management integration, organizational hierarchy sync, compensation band validation workflow, authentication/security setup
+                        <br><strong>Deliverables:</strong> Production-ready integrations, field mapping documentation, error handling protocols, monitoring dashboards
+                    </div>
+                </div>
+            </div>
+
+            <div class="timeline">
+                <h4>Weeks 6-7: Compliance Configuration</h4>
+                <div class="timeline-item">
+                    <div class="timeline-phase">EEOC/OFCCP Setup</div>
+                    <div>
+                        <strong>Activities:</strong> EEO-1 reporting module activation, OFCCP AAP module configuration, VETS-4212 report templates, California Fair Chance Act workflow configuration, E-Verify integration setup, audit trail validation
+                        <br><strong>Deliverables:</strong> Compliance reporting operational, test EEO-1/AAP/VETS-4212 reports generated, state-specific workflow validation
+                    </div>
+                </div>
+            </div>
+
+            <div class="timeline">
+                <h4>Weeks 8-9: Testing & Training</h4>
+                <div class="timeline-item">
+                    <div class="timeline-phase">UAT & Enablement</div>
+                    <div>
+                        <strong>Activities:</strong> End-to-end integration testing (candidate to employee flow), compliance report validation, recruiter UAT sessions, hiring manager training, HR operations enablement, documentation finalization
+                        <br><strong>Deliverables:</strong> UAT sign-off, training materials (recorded sessions + job aids), production readiness checklist completed
+                    </div>
+                </div>
+            </div>
+
+            <div class="timeline">
+                <h4>Week 10: Production Validation & Hypercare</h4>
+                <div class="timeline-item">
+                    <div class="timeline-phase">Go-Live Support</div>
+                    <div>
+                        <strong>Activities:</strong> Production monitoring (integration performance, error rates), Hypercare support (rapid issue resolution), Quick-win optimizations, Post-implementation review, Continuous improvement roadmap
+                        <br><strong>Deliverables:</strong> Stable production operations, <99.5% integration uptime, recruiter confidence restored, compliance audit readiness validated
+                    </div>
+                </div>
+            </div>
+
+            <h3>Success Metrics (90 Days Post-Implementation)</h3>
+
+            <div class="metric-grid">
+                <div class="metric-box">
+                    <h4>Integration Reliability</h4>
+                    <div class="metric-value">99.5%+</div>
+                    <p>Uptime for SAP SuccessFactors bi-directional sync; candidate-to-employee conversion, position updates, offer approvals</p>
+                </div>
+
+                <div class="metric-box">
+                    <h4>Compliance Readiness</h4>
+                    <div class="metric-value">100%</div>
+                    <p>Audit-ready EEO-1, OFCCP AAP, VETS-4212 reports with zero manual manipulation required</p>
+                </div>
+
+                <div class="metric-box">
+                    <h4>User Adoption</h4>
+                    <div class="metric-value">85%+</div>
+                    <p>Recruiter satisfaction score; elimination of shadow spreadsheets and workarounds</p>
+                </div>
+
+                <div class="metric-box">
+                    <h4>Time-to-Fill Improvement</h4>
+                    <div class="metric-value">15-20%</div>
+                    <p>Reduction through streamlined workflows, automated approvals, integrated onboarding</p>
+                </div>
+            </div>
+
+            <h2>4. Alternative Consideration: SmartRecruiters (SAP-Owned)</h2>
+
+            <div class="alternative-section">
+                <h3>SmartRecruiters Post-SAP Acquisition Analysis</h3>
+                <p><strong>Context:</strong> SAP completed SmartRecruiters acquisition in November 2025 (3 months ago). Platform positioning as "native" SuccessFactors recruiting solution creates strategic appeal but introduces meaningful risks.</p>
+
+                <h4>Potential Advantages</h4>
+                <ul>
+                    <li><strong>SAP Ecosystem Alignment:</strong> Long-term roadmap likely includes deeper SuccessFactors convergence, unified user experience, and SAP BTP-native architecture</li>
+                    <li><strong>First-Party Integration:</strong> Future state may eliminate middleware complexity with direct SF Employee Central connectivity</li>
+                    <li><strong>SAP Support Model:</strong> Single vendor relationship for HRIS + ATS; consolidated support contracts</li>
+                </ul>
+
+                <h4>Significant Risks & Unknowns</h4>
+                <ul>
+                    <li><strong class="risk-level-high">Integration Maturity Unproven:</strong> Only 3 months post-acquisition; "native" integration claims require 12-18 months production validation across diverse SF module configurations (Employee Central, Compensation, Performance, Learning variations)</li>
+                    <li><strong class="risk-level-high">Product Roadmap Uncertainty:</strong> SAP acquisitions historically result in 12-24 month product roadmap disruption; feature development frozen during integration planning</li>
+                    <li><strong class="risk-level-high">Customer References Limited:</strong> Few (if any) enterprise customers completed SmartRecruiters-SF integration post-acquisition; reference calls would reveal early-adopter challenges</li>
+                    <li><strong class="risk-level-medium">Compliance Tool Maturity:</strong> SmartRecruiters' OFCCP/EEO compliance capabilities less proven than Greenhouse's 10+ years serving federal contractors; fewer third-party compliance partner integrations</li>
+                    <li><strong class="risk-level-medium">Migration Disruption:</strong> 12-16 week migration timeline disrupts recruiting operations; historical data migration complexity; user retraining burden</li>
+                    <li><strong class="risk-level-medium">Greenhouse Investment Loss:</strong> Significant licensing + configuration investment over 6 months lost; sunk cost consideration</li>
+                </ul>
+
+                <h4>When to Reconsider SmartRecruiters</h4>
+                <p>SmartRecruiters may become the right choice in 12-18 months when:</p>
+                <ul>
+                    <li>SAP's post-acquisition integration roadmap clarifies and delivers proven SF module connectivity</li>
+                    <li>Customer references validate production-grade integration across complex SF configurations</li>
+                    <li>Compliance capabilities mature with federal contractor validation and third-party auditor endorsements</li>
+                    <li>Current Greenhouse investment has delivered ROI and organization seeks strategic consolidation to SAP-only vendor landscape</li>
+                </ul>
+
+                <p><strong>Current Recommendation:</strong> Monitor SmartRecruiters maturity over next 12 months while completing Greenhouse implementation. Revisit in 2027 when SAP integration track record established.</p>
+            </div>
+
+            <h2>5. Historical Context: Lever (Not a Viable Return Option)</h2>
+
+            <div class="metric-card">
+                <p><strong>Background:</strong> Organization previously migrated away from Lever to Greenhouse. Including Lever in this analysis for historical context and to document why return is not strategic option.</p>
+
+                <h4>Why Migration from Lever Occurred</h4>
+                <ul>
+                    <li><strong>SAP Integration Limitations:</strong> Uni-directional data push only; frequent sync failures reported; no native SuccessFactors connectors</li>
+                    <li><strong>Federal Contractor Compliance Gaps:</strong> Basic EEO tracking insufficient for OFCCP AAP requirements; manual Excel-based reporting workflows; no automated adverse impact analysis</li>
+                    <li><strong>Enterprise Scalability Concerns:</strong> Platform performance degradation at high candidate volumes; API rate limits (100 req/min) caused bottlenecks</li>
+                    <li><strong>Limited Compliance Partner Ecosystem:</strong> Minimal third-party integrations for background checks, assessments, E-Verify</li>
+                </ul>
+
+                <h4>Current State: No Strategic Justification for Return</h4>
+                <ul>
+                    <li>Original migration drivers remain unaddressed in current Lever product</li>
+                    <li>Would repeat past failures without solving root cause challenges</li>
+                    <li>SAP SuccessFactors integration architecture still inferior to Greenhouse + middleware approach</li>
+                    <li>Federal contractor compliance capabilities still lag Greenhouse by 2-3 years</li>
+                </ul>
+
+                <p><strong>Conclusion:</strong> Lever included for completeness but <strong class="risk-level-critical">not recommended</strong> under any scenario. Past migration decision validated; no regression path exists.</p>
+            </div>
+
+            <h2>6. Platform Feature Comparison</h2>
+
+            <table class="comparison-table">
+                <thead>
+                    <tr>
+                        <th>Feature Category</th>
+                        <th>Greenhouse (Recommended)</th>
+                        <th>SmartRecruiters (Alternative)</th>
+                        <th>Lever (Historical)</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td class="feature-category">Structured Hiring Methodology</td>
+                        <td><span class="status-excellent">Excellent</span><br>Industry pioneer; interview kits, weighted scorecards, focus attributes, 31-38% bias reduction proven</td>
+                        <td><span class="status-good">Good</span><br>Competency-based evaluation, standardized scorecards, AI-powered matching</td>
+                        <td><span class="status-fair">Fair</span><br>Basic feedback forms, limited scorecard templates</td>
+                    </tr>
+                    <tr>
+                        <td class="feature-category">Integration Ecosystem</td>
+                        <td><span class="status-excellent">Excellent</span><br>500+ marketplace integrations; HRIS, background checks, assessments, video, sourcing, job boards</td>
+                        <td><span class="status-good">Good</span><br>150+ integrations; SAP ecosystem advantage but narrower third-party options vs. Greenhouse</td>
+                        <td><span class="status-fair">Fair</span><br>100+ integrations; basic connectivity</td>
+                    </tr>
+                    <tr>
+                        <td class="feature-category">SAP SuccessFactors Integration</td>
+                        <td><span class="status-excellent">Excellent</span><br>Proven Workato/BTP middleware architecture; bi-directional sync; hundreds of enterprise deployments; 5+ years production maturity</td>
+                        <td><span class="status-fair">Fair</span><br>"Native" integration claims unproven (3 months post-acquisition); limited customer references; maturity TBD</td>
+                        <td><span class="status-poor">Poor</span><br>Third-party middleware required; uni-directional push; frequent sync issues documented</td>
+                    </tr>
+                    <tr>
+                        <td class="feature-category">Candidate Sourcing</td>
+                        <td><span class="status-excellent">Excellent</span><br>LinkedIn Recruiter Sys Connect, SeekOut, Gem integrations; Chrome extension; talent community nurture workflows</td>
+                        <td><span class="status-good">Good</span><br>Native sourcing tools, LinkedIn integration, automated campaigns</td>
+                        <td><span class="status-good">Good</span><br>LeverTRM sourcing add-on, LinkedIn integration</td>
+                    </tr>
+                    <tr>
+                        <td class="feature-category">Interview Scheduling</td>
+                        <td><span class="status-excellent">Excellent</span><br>Native scheduling tool; interviewer availability sync; Zoom/Teams/Meet integration; self-scheduling for candidates</td>
+                        <td><span class="status-good">Good</span><br>Calendar integrations, self-scheduling, automated reminders</td>
+                        <td><span class="status-good">Good</span><br>Calendar sync, manual scheduling workflows</td>
+                    </tr>
+                    <tr>
+                        <td class="feature-category">Offer Management</td>
+                        <td><span class="status-excellent">Excellent</span><br>Template library, multi-level approvals, DocuSign integration, compensation validation via SF middleware</td>
+                        <td><span class="status-good">Good</span><br>Offer templates, approval workflows, e-signature, SF Compensation access post-acquisition</td>
+                        <td><span class="status-fair">Fair</span><br>Basic templates, limited approvals, manual comp validation</td>
+                    </tr>
+                    <tr>
+                        <td class="feature-category">Reporting & Analytics</td>
+                        <td><span class="status-excellent">Excellent</span><br>Executive dashboards, custom report builder, diversity analytics, source effectiveness, pipeline velocity, SQL-based custom reports</td>
+                        <td><span class="status-good">Good</span><br>Pre-built dashboards, diversity analytics, time-to-fill metrics</td>
+                        <td><span class="status-good">Good</span><br>Standard reports, limited customization, pipeline metrics</td>
+                    </tr>
+                    <tr>
+                        <td class="feature-category">Mobile Experience</td>
+                        <td><span class="status-good">Good</span><br>Mobile-responsive web; core functionality accessible; hiring manager approvals on mobile</td>
+                        <td><span class="status-excellent">Excellent</span><br>Native iOS/Android apps; mobile-optimized candidate experience</td>
+                        <td><span class="status-good">Good</span><br>Mobile-responsive web; candidate mobile application</td>
+                    </tr>
+                    <tr>
+                        <td class="feature-category">AI/Automation</td>
+                        <td><span class="status-good">Good</span><br>Automated email workflows, candidate matching suggestions, workflow rules</td>
+                        <td><span class="status-excellent">Excellent</span><br>AI-powered candidate matching, automated screening, chatbot FAQs, predictive analytics</td>
+                        <td><span class="status-fair">Fair</span><br>Basic email automation, limited AI/ML</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <h2>7. Risk Mitigation & Governance</h2>
+
+            <h3>Implementation Risk Register</h3>
+
+            <table class="comparison-table">
+                <thead>
+                    <tr>
+                        <th>Risk Category</th>
+                        <th>Description</th>
+                        <th>Probability</th>
+                        <th>Impact</th>
+                        <th>Mitigation Strategy</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td class="feature-category">Integration Complexity</td>
+                        <td>SAP BTP/Workato configuration errors; data sync failures; performance bottlenecks</td>
+                        <td class="risk-level-medium">MEDIUM</td>
+                        <td class="risk-level-high">HIGH</td>
+                        <td><strong>Mitigation:</strong> Trillium team familiar with SF Employee Central configuration; proven Workato recipes reduce custom development; extensive testing weeks 8-9; monitoring dashboards for early detection</td>
+                    </tr>
+                    <tr>
+                        <td class="feature-category">User Adoption</td>
+                        <td>Recruiter skepticism after incomplete initial implementation; change fatigue; training gaps</td>
+                        <td class="risk-level-medium">MEDIUM</td>
+                        <td class="risk-level-high">HIGH</td>
+                        <td><strong>Mitigation:</strong> Trillium embedded partner advantage (existing trust); early recruiter involvement in UAT; role-based training with real workflow examples; executive sponsorship; 2-week hypercare support</td>
+                    </tr>
+                    <tr>
+                        <td class="feature-category">Compliance Gaps</td>
+                        <td>OFCCP/EEO reporting fails to meet audit standards; state-specific requirements misconfigured</td>
+                        <td class="risk-level-low">LOW</td>
+                        <td class="risk-level-critical">CRITICAL</td>
+                        <td><strong>Mitigation:</strong> Greenhouse proven compliance tools; test EEO-1/AAP/VETS-4212 reports generated weeks 6-7; compliance consultant review pre-go-live; audit trail validation</td>
+                    </tr>
+                    <tr>
+                        <td class="feature-category">Timeline Delays</td>
+                        <td>Implementation extends beyond 10-week target; resource constraints; scope creep</td>
+                        <td class="risk-level-low">LOW</td>
+                        <td class="risk-level-medium">MEDIUM</td>
+                        <td><strong>Mitigation:</strong> Fixed-scope approach; weekly steering committee; Trillium PM dedicated 100%; buffer in 8-10 week estimate; deferred optimizations to Month 3-6</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <h3>Governance Structure</h3>
+
+            <div class="metric-card">
+                <h4>Steering Committee (Weekly Cadence)</h4>
+                <ul>
+                    <li><strong>Executive Sponsor:</strong> VP HR or Chief People Officer (decision authority, escalation resolution)</li>
+                    <li><strong>Project Lead:</strong> Trillium Implementation Manager (day-to-day execution, issue escalation)</li>
+                    <li><strong>Business Owner:</strong> Head of Talent Acquisition (requirements validation, UAT sign-off)</li>
+                    <li><strong>Technical Lead:</strong> HRIS Manager or SAP SuccessFactors Administrator (integration oversight, data validation)</li>
+                    <li><strong>Compliance Lead:</strong> HR Compliance Manager (regulatory requirement validation)</li>
+                </ul>
+            </div>
+
+            <h2>8. Strategic Recommendation Summary</h2>
+
+            <div class="recommendation-box">
+                <h3>Final Decision: Complete Greenhouse Implementation</h3>
+
+                <p><strong>Greenhouse is the clear strategic choice:</strong></p>
+                <ol>
+                    <li><strong>Industry Gold Standard:</strong> 7,500+ enterprises trust Greenhouse for structured hiring excellence and compliance rigor</li>
+                    <li><strong>Proven SAP Integration:</strong> Battle-tested Workato/BTP middleware architecture vs. SmartRecruiters unproven 3-month-old "native" integration</li>
+                    <li><strong>Federal Contractor Compliance Leader:</strong> 10+ years serving regulated industries; comprehensive EEOC/OFCCP modules; audit-ready from day one</li>
+                    <li><strong>500+ Integration Ecosystem:</strong> Best-of-breed tool connectivity unmatched by any competitor</li>
+                    <li><strong>Investment Protection:</strong> 6 months of licensing + configuration investment delivers immediate ROI upon completion</li>
+                    <li><strong>Trillium Institutional Knowledge:</strong> 8-10 week remediation leverages embedded team's deep SAP SuccessFactors + recruiting workflow expertise</li>
+                </ol>
+
+                <p><strong>SmartRecruiters Consideration:</strong> Monitor maturity over 12-18 months; revisit in 2027 when SAP integration track record established</p>
+
+                <p><strong>Lever:</strong> Not a viable option; original migration drivers remain unaddressed</p>
+
+                <p><strong>Next Steps:</strong></p>
+                <ol>
+                    <li>Executive approval of Trillium-led 8-10 week remediation roadmap</li>
+                    <li>Weeks 1-2 discovery and architecture review kickoff</li>
+                    <li>Weekly steering committee establishment</li>
+                    <li>Target completion: 10 weeks from approval</li>
+                </ol>
+            </div>
+
+            <div style="margin-top: 50px; padding: 30px; background: rgba(30, 41, 59, 0.6); border-radius: 8px; text-align: center;">
+                <p style="font-size: 0.9em; color: #94a3b8;"><strong>Prepared for:</strong> Automotive Manufacturing Leadership Team | <strong>Analysis Date:</strong> February 2026</p>
+                <p style="font-size: 0.9em; color: #94a3b8; margin-top: 10px;"><strong>Implementation Partner:</strong> Trillium Hiring Services (Embedded Partner - 6 Months Institutional Knowledge)</p>
             </div>
         </div>
-
-        <div class="section">
+    </div>
+</body>
+</html>
